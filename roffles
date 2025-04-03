@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raffle Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Welcome to the Raffle!</h1>
+    <form id="raffleForm">
+        <label for="name">Enter Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Enter Raffle</button>
+    </form>
+    <h2>Winner:</h2>
+    <p id="winner"></p>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+form {
+    margin: 20px 0;
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+const raffleForm = document.getElementById('raffleForm');
+const winnerDisplay = document.getElementById('winner');
+let entries = [];
+
+// Handle form submission
+raffleForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    if (name) {
+        entries.push(name);
+        document.getElementById('name').value = ''; // Clear the input
+        alert(`${name} entered the raffle!`);
+    }
+});
+
+// Simulate drawing a winner
+function drawWinner() {
+    if (entries.length === 0) {
+        alert("No entries yet!");
+        return;
+    }
+    const winner = entries[Math.floor(Math.random() * entries.length)];
+    winnerDisplay.textContent = winner;
+}
+// Example: Draw winner after 5 seconds
+setTimeout(drawWinner, 5000);
